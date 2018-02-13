@@ -1,0 +1,9 @@
+useDynLib(BASIX)
+
+export(BASIX.equal)
+export(BASIX.find.interval)
+export(BASIX.match)
+export(BASIX.unique)
+export(BASIX.table)
+export(BASIX.combnapply)
+

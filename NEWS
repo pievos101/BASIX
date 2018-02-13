@@ -1,0 +1,10 @@
+BASIX 1.1
+=========================
+- BASIX.unique: faster
+- BASIX.unique and BASIX.equal
+  now works also for character vectors.
+
+BASIX 1.0
+===========================
+
+- first release on CRAN 
