@@ -1,4 +1,6 @@
-useDynLib(BASIX)
+useDynLib(BASIX, .registration = TRUE)
+
+import(methods)
 
 export(BASIX.equal)
 export(BASIX.find.interval)

@@ -4,7 +4,7 @@
 #include <Rinternals.h>
 
 // for numeric vectors
-SEXP C_get_sfreqh_C(SEXP RRuniquematrix, SEXP RRmatrix)
+extern SEXP C_get_sfreqh_C(SEXP RRuniquematrix, SEXP RRmatrix)
 {
 
 SEXP freq = R_NilValue; // frequenz of each haplotype
@@ -30,9 +30,12 @@ J2    = INTEGER(Rdim)[1]; // Spalten
 PROTECT(freq     = Rf_allocVector(INTSXP,I1));
 
 Runiquematrix           = coerceVector(RRuniquematrix, INTSXP);
+PROTECT(Runiquematrix);
 int *R1                 = INTEGER(Runiquematrix);
 
 Rmatrix                 = coerceVector(RRmatrix, INTSXP);
+PROTECT(Rmatrix);
+
 int *R2                 = INTEGER(Rmatrix);
 
 int count;
@@ -64,14 +67,14 @@ INTEGER(freq)[j] = count ;
 
 }
 
-UNPROTECT(1);
+UNPROTECT(3);
 
 return(freq);
 
 }
 
 // for character vectors
-SEXP C_get_sfreqh_C2(SEXP RRuniquematrix, SEXP RRmatrix)
+extern SEXP C_get_sfreqh_C2(SEXP RRuniquematrix, SEXP RRmatrix)
 {
 
 SEXP freq = R_NilValue; // frequenz of each haplotype

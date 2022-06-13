@@ -3,11 +3,13 @@
 #include <R.h>
 #include <Rinternals.h>
 
-SEXP my_match_C(SEXP pos, SEXP Rvector)
+extern SEXP my_match_C(SEXP pos, SEXP Rvector)
 {
 
 pos      = coerceVector(pos, REALSXP);
+PROTECT(pos);
 Rvector  = coerceVector(Rvector, REALSXP);
+PROTECT(Rvector);
 
 long int size1;
 long int size2;
@@ -50,7 +52,7 @@ long int m       = 0;
 	
   }
 
-UNPROTECT(1);
+UNPROTECT(3);
 return matchIDS;
 
 
@@ -58,13 +60,15 @@ return matchIDS;
 
 // returns the id in Rvector of bigger value than pos
 
-SEXP whichbigger_C(SEXP pos, SEXP Rvector)
+extern SEXP whichbigger_C(SEXP pos, SEXP Rvector)
 {
 
 PROTECT(pos);
 
-  pos      = coerceVector(pos, INTSXP);
-  Rvector  = coerceVector(Rvector, INTSXP);
+pos      = coerceVector(pos, INTSXP);
+PROTECT(pos);
+Rvector  = coerceVector(Rvector, INTSXP);
+PROTECT(Rvector);
 
 int size1;
 int size2;
@@ -90,7 +94,7 @@ if(treffer==0){
 }
 
 
-UNPROTECT(1);
+UNPROTECT(3);
 return pos;
 
 }

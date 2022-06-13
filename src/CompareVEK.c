@@ -4,7 +4,7 @@
 #include <Rinternals.h>
 
 // in case of numeric vectors
-SEXP Ccompare(SEXP Rvector1, SEXP Rvector2)
+extern SEXP Ccompare(SEXP Rvector1, SEXP Rvector2)
 {
 
 SEXP val        = R_NilValue;
@@ -12,7 +12,10 @@ PROTECT(val     = Rf_allocVector(INTSXP,1));
 INTEGER(val)[0] = 1;
 
  Rvector1 = coerceVector(Rvector1, REALSXP);
+ PROTECT(Rvector1);
  Rvector2 = coerceVector(Rvector2, REALSXP);
+ PROTECT(Rvector2);
+ 
  const double *vec1 = REAL(Rvector1);
  const double *vec2 = REAL(Rvector2);
 
@@ -26,13 +29,13 @@ for(long int i=0 ; i < size; i++) {
 	}
 }
 
-UNPROTECT(1);
+UNPROTECT(3);
 return val;
 
 }
 
 // in case of character vectors
-SEXP Ccompare2(SEXP Rvector1, SEXP Rvector2)
+extern SEXP Ccompare2(SEXP Rvector1, SEXP Rvector2)
 {
 
 SEXP val        = R_NilValue;

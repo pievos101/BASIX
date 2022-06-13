@@ -24,7 +24,7 @@ return(equal);
 } // End of function in_compare
 
 
-SEXP my_unique_C(SEXP RinMatrix){
+extern SEXP my_unique_C(SEXP RinMatrix){
 
 SEXP duplicated = R_NilValue;
 
@@ -38,6 +38,7 @@ I    = INTEGER(Rdim)[0]; // Reihen
 J    = INTEGER(Rdim)[1]; // Spalten
 
 Rvalue           = coerceVector(RinMatrix, REALSXP);
+PROTECT(Rvalue);
 double *Rval     = REAL(Rvalue);
 
 PROTECT(duplicated = allocVector(INTSXP,I));
@@ -77,12 +78,12 @@ for (int i = 0; i < I-1; i++){
  }
 }
 
-UNPROTECT(1);
+UNPROTECT(2);
 return(duplicated);
 
 }
 
-SEXP my_unique_C2(SEXP RinMatrix){
+extern SEXP my_unique_C2(SEXP RinMatrix){
 
 SEXP duplicated = R_NilValue;
 

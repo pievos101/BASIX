@@ -3,7 +3,7 @@
 #include <R.h>
 #include <Rinternals.h>
 
-SEXP combnapply_C(SEXP Rvector, SEXP RRmode){
+extern SEXP combnapply_C(SEXP Rvector, SEXP RRmode){
 
 SEXP ret = R_NilValue;
 
@@ -23,6 +23,7 @@ Rmode         = STRING_ELT(RRmode,0);
 mode          = (char*)CHAR(Rmode);
 
 Rvalue        = coerceVector(Rvector, REALSXP);
+PROTECT(Rvalue);
 double *Rval  = REAL(Rvalue);
 
 PROTECT(ret = allocVector(REALSXP, (size * (size-1))/2 ));
@@ -141,7 +142,7 @@ long int  count = 0 ;
 } // End of mode ==
 
 
-UNPROTECT(1);
+UNPROTECT(2);
 
 return ret;
 
